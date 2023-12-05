@@ -194,7 +194,7 @@ long part1(const vector<string>& input, const vector<string>& mapNames) {
 }
 
 int main() {
-    auto constexpr TEST = 1;
+    auto constexpr TEST = 0;
     auto constexpr TEST_FILE = "../test", INPUT_FILE = "input05";
     auto const filename = TEST == 1 ? TEST_FILE : INPUT_FILE;
     auto const lineCount = getLineCount(filename);
