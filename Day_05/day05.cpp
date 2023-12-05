@@ -149,8 +149,13 @@ long part2(const vector<string>& input, const vector<string>& mapNames) {
         };
     }
 
+    int count = 0;
     for (const auto& map: maps) {
+        auto t1 = Clock::now();
         lookup2(map, seeds);
+        auto t2 = Clock::now();
+        cout << mapNames[count++] << " "
+                << std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count() << " s\n";
     }
 
     long lowest = LONG_MAX;
@@ -211,7 +216,7 @@ int main() {
     cout << " (" << std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() << " μs)\n";
 
     t1 = Clock::now();
-    cout << part2(input, mapNames); // 69841803 (200 s)
+    cout << part2(input, mapNames); // 69841803 (192 s)
     t2 = Clock::now();
     cout << " (" << std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count() << " s)\n";
 }
