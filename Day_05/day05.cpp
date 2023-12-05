@@ -180,7 +180,7 @@ long part1(const vector<string>& input, const vector<string>& mapNames) {
         seeds[i - 1] = stol(substr[i]);
     }
 
-    // lookup seeds
+    // look up seeds
     long lowest = LONG_MAX;
     for (long const seed: seeds) {
         long n = seed;
