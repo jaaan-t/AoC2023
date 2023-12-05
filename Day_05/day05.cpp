@@ -51,7 +51,7 @@ vector<vector<long>> getMapInfo(const vector<vector<long>>& map, const string& n
         dest_end = max(dest_end, dest + len - 1);
     }
     cout << name << ":  \t";
-    cout << source_start << ", " << source_end << "\n";
+    cout << source_start << ", " << source_end << "~\n";
 
     return mapInfo;
 }
@@ -189,7 +189,7 @@ long part1(const vector<string>& input, const vector<string>& mapNames) {
 }
 
 int main() {
-    auto constexpr TEST = 1;
+    auto constexpr TEST = 0;
     auto constexpr TEST_FILE = "../test", INPUT_FILE = "input05";
     auto const filename = TEST == 1 ? TEST_FILE : INPUT_FILE;
     auto const lineCount = getLineCount(filename);
@@ -211,7 +211,7 @@ int main() {
     cout << " (" << std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() << " μs)\n";
 
     t1 = Clock::now();
-    cout << part2(input, mapNames); // 69841803
+    cout << part2(input, mapNames); // 69841803 (~ 3 m)
     t2 = Clock::now();
     cout << " (" << std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count() << " s)\n";
 }
