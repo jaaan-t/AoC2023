@@ -56,7 +56,7 @@ vector<vector<long>> getMapInfo(const vector<vector<long>>& map, const string& n
     return mapInfo;
 }
 
-long lookup(const vector<vector<long>>& map, long const n, string const& name) {
+long lookup(const vector<vector<long>>& map, long const n) {
     for (const auto& entry: map) {
         auto const source = entry[0];
         auto const dest = entry[1];
@@ -93,24 +93,17 @@ void lookup2(const vector<vector<long>>& map, vector<long>& seeds) {
     }
 }
 
-long part2(const vector<string>& input) {
+long part2(const vector<string>& input, const vector<string>& mapNames) {
     // get maps
-    auto const seed_soil = getMap(input, "seed-to-soil map:");
-    auto const soil_fert = getMap(input, "soil-to-fertilizer map:");
-    auto const fert_water = getMap(input, "fertilizer-to-water map:");
-    auto const water_light = getMap(input, "water-to-light map:");
-    auto const light_temp = getMap(input, "light-to-temperature map:");
-    auto const temp_humid = getMap(input, "temperature-to-humidity map:");
-    auto const humid_loc = getMap(input, "humidity-to-location map:");
+    vector<vector<vector<long>>> maps(mapNames.size());
+    for (int i = 0; i < mapNames.size(); ++i) {
+        maps[i] = getMap(input, mapNames[i]);
+    }
 
     /* get map info
-    auto const seed_soil_i = getMapInfo(seed_soil, "seed_soil");
-    auto const soil_fert_i = getMapInfo(soil_fert, "soil_fert");
-    auto const fert_water_i = getMapInfo(fert_water, "fert_water");
-    auto const water_light_i = getMapInfo(water_light, "water_light");
-    auto const light_temp_i = getMapInfo(light_temp, "light_temp");
-    auto const temp_humid_i = getMapInfo(temp_humid, "temp_humid");
-    auto const humid_loc_i = getMapInfo(humid_loc, "humid_loc");
+    for (int i = 0; i < maps.size(); ++i) {
+        getMapInfo(maps[i], mapNames[i]);
+    }
     */
 
     // get seed ranges
@@ -155,28 +148,10 @@ long part2(const vector<string>& input) {
             ++numSeeds2;
         };
     }
-    // cout << numSeeds << " = " << numSeeds2 << " = " << seeds.size() << "\n";
 
-    lookup2(seed_soil, seeds);
-    cout << "soil\n";
-
-    lookup2(soil_fert, seeds);
-    cout << "fert\n";
-
-    lookup2(fert_water, seeds);
-    cout << "water\n";
-
-    lookup2(water_light, seeds);
-    cout << "light:\n";
-
-    lookup2(light_temp, seeds);
-    cout << "temp:\n";
-
-    lookup2(temp_humid, seeds);
-    cout << "humid:\n";
-
-    lookup2(humid_loc, seeds);
-    cout << "loc:\n";
+    for (const auto& map: maps) {
+        lookup2(map, seeds);
+    }
 
     long lowest = LONG_MAX;
     for (long s: seeds) {
@@ -186,15 +161,12 @@ long part2(const vector<string>& input) {
     return lowest;
 }
 
-long part1(const vector<string>& input) {
+long part1(const vector<string>& input, const vector<string>& mapNames) {
     // get maps
-    auto const seed_to_soil = getMap(input, "seed-to-soil map:");
-    auto const soil_to_fert = getMap(input, "soil-to-fertilizer map:");
-    auto const fert_to_water = getMap(input, "fertilizer-to-water map:");
-    auto const water_to_light = getMap(input, "water-to-light map:");
-    auto const light_to_temp = getMap(input, "light-to-temperature map:");
-    auto const temp_to_humid = getMap(input, "temperature-to-humidity map:");
-    auto const humid_to_loc = getMap(input, "humidity-to-location map:");
+    vector<vector<vector<long>>> maps(mapNames.size());
+    for (int i = 0; i < mapNames.size(); ++i) {
+        maps[i] = getMap(input, mapNames[i]);
+    }
 
     // get seeds
     auto const substr = getSubStrings(input[0], ' ');
@@ -206,33 +178,40 @@ long part1(const vector<string>& input) {
     // lookup seeds
     long lowest = LONG_MAX;
     for (long const seed: seeds) {
-        auto const soil = lookup(seed_to_soil, seed, "seed");
-        auto const fert = lookup(soil_to_fert, soil, "soil");
-        auto const water = lookup(fert_to_water, fert, "fert");
-        auto const light = lookup(water_to_light, water, "water");
-        auto const temp = lookup(light_to_temp, light, "light");
-        auto const humid = lookup(temp_to_humid, temp, "temp");
-        auto const loc = lookup(humid_to_loc, humid, "humid");
-        lowest = min(lowest, loc);
+        long n = seed;
+        for (const auto& map: maps) {
+            n = lookup(map, n);
+        }
+        lowest = min(lowest, n);
     }
 
     return lowest;
 }
 
 int main() {
-    auto constexpr TEST = 0;
+    auto constexpr TEST = 1;
     auto constexpr TEST_FILE = "../test", INPUT_FILE = "input05";
     auto const filename = TEST == 1 ? TEST_FILE : INPUT_FILE;
     auto const lineCount = getLineCount(filename);
     auto const input = getInput(filename, lineCount + 1); // extra line so convertToMap will work
 
+    const vector<string> mapNames = {
+        "seed-to-soil map:",
+        "soil-to-fertilizer map:",
+        "fertilizer-to-water map:",
+        "water-to-light map:",
+        "light-to-temperature map:",
+        "temperature-to-humidity map:",
+        "humidity-to-location map:"
+    };
+
     auto t1 = Clock::now();
-    cout << part1(input); // 177942185
+    cout << part1(input, mapNames); // 177942185
     auto t2 = Clock::now();
     cout << " (" << std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() << " μs)\n";
 
     t1 = Clock::now();
-    cout << part2(input);
+    cout << part2(input, mapNames); // 69841803
     t2 = Clock::now();
     cout << " (" << std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count() << " s)\n";
 }
