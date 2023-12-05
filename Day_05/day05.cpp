@@ -193,7 +193,7 @@ int main() {
     auto constexpr TEST_FILE = "../test", INPUT_FILE = "input05";
     auto const filename = TEST == 1 ? TEST_FILE : INPUT_FILE;
     auto const lineCount = getLineCount(filename);
-    auto const input = getInput(filename, lineCount + 1); // extra line so convertToMap will work
+    auto const input = getInput(filename, lineCount + 1); // extra line so getMap will work
 
     const vector<string> mapNames = {
         "seed-to-soil map:",
@@ -211,7 +211,7 @@ int main() {
     cout << " (" << std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() << " μs)\n";
 
     t1 = Clock::now();
-    cout << part2(input, mapNames); // 69841803 (~ 3 m)
+    cout << part2(input, mapNames); // 69841803 (200 s)
     t2 = Clock::now();
     cout << " (" << std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count() << " s)\n";
 }
