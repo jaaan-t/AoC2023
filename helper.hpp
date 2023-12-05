@@ -11,7 +11,15 @@ using std::vector;
 using std::string;
 using std::ifstream;
 using std::stringstream;
+using std::stoi;
 using Clock = std::chrono::high_resolution_clock;
+
+inline size_t stringToSize_T(const string& s) {
+    stringstream stream(s);
+    size_t output;
+    stream >> output;
+    return output;
+}
 
 inline bool isNumber(const string& s) {
     return std::ranges::all_of(s, [](const char c) { return isdigit(c); });
