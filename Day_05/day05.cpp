@@ -2,7 +2,6 @@
 
 using std::min;
 using std::max;
-using std::stol;
 
 vector<vector<long>> getMap(const vector<string>& input, const string& map_name) {
     vector<vector<long>> map;
