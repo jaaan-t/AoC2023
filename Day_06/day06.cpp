@@ -1,16 +1,15 @@
 #include "../helper.hpp"
 
-
-int64_t getWins(const int64_t t, const int64_t d) {
-    int64_t wins = 0;
-    for (int64_t i = 1; i < t - 1; ++i) {
-        const int64_t dist = (t - i) * i;
+long getWins(const long t, const long d) {
+    long wins = 0;
+    for (long i = 1; i < t - 1; ++i) {
+        const long dist = (t - i) * i;
         if (dist > d) wins += 1;
     }
     return wins;
 }
 
-int64_t part2(const vector<string>& input) {
+long part2(const vector<string>& input) {
     const vector<string> line1 = getSubStrings(input[0], ' ');
     stringstream stream1;
     for (int i = 1; i < line1.size(); ++i) {
@@ -26,20 +25,20 @@ int64_t part2(const vector<string>& input) {
     return getWins(stol(stream1.str()), stol(stream2.str()));
 }
 
-int64_t part1(const vector<string>& input) {
+long part1(const vector<string>& input) {
     const vector<string> line1 = getSubStrings(input[0], ' ');
     const vector<string> line2 = getSubStrings(input[1], ' ');
-    vector<int64_t> time;
-    for (int64_t i = 1; i < line1.size(); ++i) {
+    vector<long> time;
+    for (long i = 1; i < line1.size(); ++i) {
         time.push_back(stol(line1[i]));
     }
-    vector<int64_t> dist;
-    for (int64_t i = 1; i < line2.size(); ++i) {
+    vector<long> dist;
+    for (long i = 1; i < line2.size(); ++i) {
         dist.push_back(stol(line2[i]));
     }
 
-    int64_t wins = 1;
-    for (int64_t i = 0; i < time.size(); ++i) {
+    long wins = 1;
+    for (long i = 0; i < time.size(); ++i) {
         wins *= getWins(time[i], dist[i]);
     }
     return wins;
