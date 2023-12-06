@@ -50,9 +50,9 @@ long part1(const vector<string>& input) {
 int main() {
     auto constexpr TEST = 0;
     auto constexpr TEST_FILE = "../test", INPUT_FILE = "input06";
-    auto const filename = TEST == 1 ? TEST_FILE : INPUT_FILE;
-    auto const line_count = getLineCount(filename);
-    auto const input = getInput(filename, line_count);
+    auto const file_name = TEST == 1 ? TEST_FILE : INPUT_FILE;
+    auto const line_count = getLineCount(file_name);
+    auto const input = getInput(file_name, line_count);
 
     auto t1 = Clock::now();
     cout << part1(input); // 2344708
