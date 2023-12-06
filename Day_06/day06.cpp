@@ -6,6 +6,7 @@ long getWins(const long t, const long d) {
         const long dist = (t - i) * i;
         if (dist > d) wins += 1;
     }
+
     return wins;
 }
 
@@ -27,11 +28,12 @@ long part2(const vector<string>& input) {
 
 long part1(const vector<string>& input) {
     const vector<string> line1 = getSubStrings(input[0], ' ');
-    const vector<string> line2 = getSubStrings(input[1], ' ');
     vector<long> time;
     for (long i = 1; i < line1.size(); ++i) {
         time.push_back(stol(line1[i]));
     }
+
+    const vector<string> line2 = getSubStrings(input[1], ' ');
     vector<long> dist;
     for (long i = 1; i < line2.size(); ++i) {
         dist.push_back(stol(line2[i]));
@@ -41,6 +43,7 @@ long part1(const vector<string>& input) {
     for (long i = 0; i < time.size(); ++i) {
         wins *= getWins(time[i], dist[i]);
     }
+
     return wins;
 }
 
