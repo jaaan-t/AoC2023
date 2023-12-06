@@ -6,7 +6,7 @@
 #include <sstream>
 #include <chrono>
 
-#define MILLI_S std::chrono::duration_cast<std::chrono::microseconds>
+#define MILLI_S std::chrono::duration_cast<std::chrono::milliseconds>
 #define MICRO_S std::chrono::duration_cast<std::chrono::microseconds>
 
 using std::cout;
