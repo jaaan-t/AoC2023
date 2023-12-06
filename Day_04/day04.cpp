@@ -2,8 +2,6 @@
 
 #include <queue>
 
-using std::stoi;
-
 int part1(const vector<string>& input, vector<int>& cards) {
     int total = 0;
 
