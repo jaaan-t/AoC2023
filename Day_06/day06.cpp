@@ -57,10 +57,10 @@ int main() {
     auto t1 = Clock::now();
     cout << part1(input); // 2344708
     auto t2 = Clock::now();
-    cout << " (" << std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() << " μs)\n";
+    cout << " (" << MICRO_S(t2 - t1).count() << " μs)\n";
 
     t1 = Clock::now();
     cout << part2(input); // 30125202
     t2 = Clock::now();
-    cout << " (" << std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() << " ms)\n";
+    cout << " (" << MILLI_S(t2 - t1).count() << " ms)\n";
 }
