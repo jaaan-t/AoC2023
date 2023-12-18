@@ -112,7 +112,7 @@ void part1(const vector<string>& input, const int lineCount, vector<vector<int>>
 }
 
 int main() {
-    auto const filename = "input03";
+    auto const filename = "../Day_03/input03";
     auto const lineCount = getLineCount(filename);
     auto const input = getInput(filename, lineCount);
     auto gears(vector(lineCount, vector(lineCount, 0)));

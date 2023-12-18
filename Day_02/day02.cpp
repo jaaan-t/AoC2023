@@ -69,7 +69,7 @@ void part2(vector<string>& input) {
 }
 
 int main() {
-    string filename = "input02";
+    string filename = "../Day_02/input02";
     int lineCount = getLineCount(filename);
     vector<string> input = getInput(filename, lineCount);
     int redMax = 12;

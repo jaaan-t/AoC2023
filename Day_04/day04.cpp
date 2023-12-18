@@ -62,7 +62,7 @@ int part2(const vector<int>& cards) {
 }
 
 int main() {
-    auto const filename = "input04";
+    auto const filename = "../Day_04/input04";
     auto const lineCount = getLineCount(filename);
     auto const input = getInput(filename, lineCount);
 

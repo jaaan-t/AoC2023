@@ -49,7 +49,7 @@ long part1(const vector<string>& input) {
 
 int main() {
     auto constexpr TEST = 0;
-    auto constexpr TEST_FILE = "../test", INPUT_FILE = "input06";
+    auto constexpr TEST_FILE = "../test", INPUT_FILE = "../Day_06/input06";
     auto const file_name = TEST == 1 ? TEST_FILE : INPUT_FILE;
     auto const line_count = getLineCount(file_name);
     auto const input = getInput(file_name, line_count);

@@ -44,7 +44,7 @@ void part2(vector<string>& input) {
 }
 
 int main() {
-    string filename = "input01";
+    string filename = "../Day_01/input01";
     int lineCount = getLineCount(filename);
     vector<string> input = getInput(filename, lineCount);
 
