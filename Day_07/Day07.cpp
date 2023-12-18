@@ -184,10 +184,11 @@ int identifyHand2(const vector<int>& count) {
 }
 
 vector<vector<int>> getCountsWithJokersReplaced(const vector<int>& count) {
+    vector<vector<int>> p;
+
     // count with no jokers shouldn't really get passed into the function
     // one joker
     if (count[12] == 1) {
-        vector<vector<int>> p;
         for (int i = 0; i < 12; ++i) {
             auto c = count;
             c[12]--;
@@ -199,7 +200,6 @@ vector<vector<int>> getCountsWithJokersReplaced(const vector<int>& count) {
 
     // two jokers
     if (count[12] == 2) {
-        vector<vector<int>> p;
         for (int i = 0; i < 12; ++i) {
             auto c = count;
             c[12]--;
@@ -215,7 +215,6 @@ vector<vector<int>> getCountsWithJokersReplaced(const vector<int>& count) {
 
     // three jokers
     if (count[12] == 3) {
-        vector<vector<int>> p;
         for (int i = 0; i < 12; ++i) {
             auto c = count;
             c[12]--;
@@ -235,7 +234,6 @@ vector<vector<int>> getCountsWithJokersReplaced(const vector<int>& count) {
 
     // four jokers
     if (count[12] == 4) {
-        vector<vector<int>> p;
         for (int i = 0; i < 12; ++i) {
             auto c = count;
             c[12]--;
@@ -257,7 +255,7 @@ vector<vector<int>> getCountsWithJokersReplaced(const vector<int>& count) {
         return p;
     }
 
-    return vector<vector<int>>{count}; // shouldn't be reached
+    return {count}; // shouldn't be reached
 }
 
 int getBestTypeWithJokersReplaced(const vector<int>& count) {
