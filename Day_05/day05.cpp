@@ -154,7 +154,7 @@ long part2(const vector<string>& input, const vector<string>& mapNames) {
         lookup2(map, seeds);
         auto t2 = Clock::now();
         cout << "\t" << mapNames[count++] << " "
-                << std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count() << " s\n";
+                << S(t2 - t1).count() << " s\n";
     }
 
     long lowest = LONG_MAX;
@@ -212,10 +212,10 @@ int main() {
     auto t1 = Clock::now();
     cout << part1(input, mapNames); // 177942185
     auto t2 = Clock::now();
-    cout << " (" << std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() << " μs)\n";
+    cout << " (" << MICRO_S(t2 - t1).count() << " μs)\n";
 
     t1 = Clock::now();
     cout << part2(input, mapNames); // 69841803 (takes a while...)
     t2 = Clock::now();
-    cout << " (" << std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count() << " s)\n";
+    cout << " (" << S(t2 - t1).count() << " s)\n";
 }
