@@ -1,7 +1,5 @@
 #include "../helper.hpp"
-#include <algorithm>
 
-using std::pair;
 using std::sort;
 
 vector CARDS_1 = {'A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2'};
@@ -17,7 +15,8 @@ enum TYPE {
     FIVE_OF_A_KIND = 55
 };
 
-struct Hand {
+class Hand {
+public:
     Hand(const int type_, const int bid_, const vector<int>& cards_, const string& hand_)
         : type(type_),
           bid(bid_),
@@ -310,7 +309,7 @@ int part1(const vector<string>& input) {
     for (const string& s: input) {
         auto line = getSubStrings(s, ' ');
         string hand_sorted(line[0]);
-        sort(hand_sorted.begin(), hand_sorted.end());
+        std::ranges::sort(hand_sorted);
         Hand hand{
             identifyHand(hand_sorted),
             stoi(line[1]),
