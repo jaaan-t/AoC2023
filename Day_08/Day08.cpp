@@ -1,7 +1,9 @@
 #include "../helper.hpp"
 #include <map>
+#include <numeric>
 
 using std::map;
+using std::lcm;
 
 struct Node {
     string name;
@@ -14,7 +16,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Node& node) {
     return stream;
 }
 
-int part2(const vector<string>& input) {
+long part2(const vector<string>& input) {
     std::map<string, Node> graph;
     for (int i = 2; i < input.size(); ++i) {
         auto sub = getSubStrings(input[i], ' ');
@@ -29,34 +31,30 @@ int part2(const vector<string>& input) {
         }
     }
 
-    int steps = 0;
     vector<Node> next_nodes = starting_nodes;
     string dir = input[0];
-    bool finished = false;
-    while (!finished) {
-        for (char c: dir) {
-            ++steps;
-            if (steps % 10000000 == 0) cout << steps << "\n";
-            for (size_t i = 0; i < next_nodes.size(); ++i) {
-                if (c == 'L') {
-                    next_nodes[i] = graph.at(next_nodes[i].left);
-                }
-                if (c == 'R') {
-                    next_nodes[i] = graph.at(next_nodes[i].right);
-                }
+    vector<long> steps_list;
+    for (int i = 0; i < next_nodes.size(); ++i) {
+        int step = 0;
+        while (true) {
+            for (char c: dir) {
+                ++step;
+                if (c == 'L') next_nodes[i] = graph.at(next_nodes[i].left);
+                if (c == 'R') next_nodes[i] = graph.at(next_nodes[i].right);
             }
-        }
-
-        finished = true;
-        for (Node n: next_nodes) {
-            if (n.name[2] != 'Z') {
-                finished = false;
+            if (next_nodes[i].name[2] == 'Z') {
+                steps_list.push_back(step);
                 break;
             }
         }
     }
 
-    return steps;
+    long steps_total = steps_list[0];
+    for (size_t i = 1; i < steps_list.size(); ++i) {
+        steps_total = lcm(steps_total, steps_list[i]);
+    }
+
+    return steps_total;
 }
 
 int part1(const vector<string>& input) {
