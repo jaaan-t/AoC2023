@@ -96,7 +96,7 @@ int main() {
     cout << " (" << MILLI_S(t2 - t1).count() << " ms)\n";
 
     t1 = Clock::now();
-    cout << part2(input);
+    cout << part2(input); // 8811050362409
     t2 = Clock::now();
     cout << " (" << MILLI_S(t2 - t1).count() << " ms)\n";
 }
